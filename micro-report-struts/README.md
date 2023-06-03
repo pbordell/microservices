@@ -1,1 +1,0 @@
-Template application for building professional crud applications with Struts2.

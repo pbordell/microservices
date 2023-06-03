@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  eurekaService:
+    build: eurekaService/
+    ports:
+      - "8080:8080"
+  apiGetaway:
+    build: apiGetaway/
+    ports:
+      - "8081:8081"
+  micro-api-quarkus:
+    build: micro-api-quarkus/
+    ports:
+      - "8082:8082"
+  micro-core-spring-boot:
+    build: eurekaService/
+    ports:
+      - "8083:8083"
+  micro-report-struts:
+    build: eurekaService/
+    ports:
+      - "8083:8083"
+
+networks:
+  observabilitysandbox:
+    name: observabilitysandbox
+    external: true

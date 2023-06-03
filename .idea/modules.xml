@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/apiGetaway/ApiGateway.iml" filepath="$PROJECT_DIR$/apiGetaway/ApiGateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/micro-api-quarkus/code-with-quarkus.iml" filepath="$PROJECT_DIR$/micro-api-quarkus/code-with-quarkus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/micro-report-struts/crud.iml" filepath="$PROJECT_DIR$/micro-report-struts/crud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/micro-oauth/demo.iml" filepath="$PROJECT_DIR$/micro-oauth/demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/micro-core-spring-boot/demo (1).iml" filepath="$PROJECT_DIR$/micro-core-spring-boot/demo (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/eurekaService/eurekaService.iml" filepath="$PROJECT_DIR$/eurekaService/eurekaService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/microservices.iml" filepath="$PROJECT_DIR$/.idea/microservices.iml" />
+    </modules>
+  </component>
+</project>
