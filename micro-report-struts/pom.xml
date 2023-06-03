@@ -4,15 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.apache.struts</groupId>
-        <artifactId>struts-examples</artifactId>
-        <version>1.1.0</version>
-    </parent>
-    
-    <artifactId>crud</artifactId>
-    <packaging>war</packaging>
-    <name>CRUD Example</name>
+    <groupId>com.pbs</groupId>
+    <artifactId>micro-report-struts</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>micro-report-struts</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -57,18 +52,14 @@
 
 
     <build>
+        <finalName>Struts2Example</finalName>
         <plugins>
             <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jetty-plugin.version}</version>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
                 <configuration>
-                    <webApp>
-                        <contextPath>/${project.artifactId}</contextPath>
-                    </webApp>
-                    <stopKey>CTRL+C</stopKey>
-                    <stopPort>8999</stopPort>
-                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <source>1.6</source>
+                    <target>1.6</target>
                 </configuration>
             </plugin>
         </plugins>
