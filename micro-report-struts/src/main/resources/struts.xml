@@ -22,11 +22,11 @@
 
         <default-action-ref name="index"/>
 
-        <action name="index" class="com.pbs.report.action.PersonAction" method="list">
+        <action name="index" class="com.pbs.report.action.ReportAction" method="list">
             <result name="success">/WEB-INF/jsp/persons.jsp</result>
             <interceptor-ref name="basicStack"/>
         </action>
-        <action name="*Person" class="com.pbs.report.action.PersonAction" method="{1}">
+        <action name="*Person" class="com.pbs.report.action.ReportAction" method="{1}">
             <result name="input">/WEB-INF/jsp/editPerson.jsp</result>
             <result name="success" type="redirectAction">index</result>
         </action>
