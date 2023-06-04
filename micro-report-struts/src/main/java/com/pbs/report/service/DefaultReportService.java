@@ -6,7 +6,6 @@ public class DefaultReportService implements ReportService {
 
     private CoreCrudsClient coreCrudsClient = new CoreCrudsClient();
 
-
     public DefaultReportService() {
     }
 
