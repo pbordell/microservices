@@ -1,6 +1,5 @@
 package com.pbs.report.client;
 
-
 import com.pbs.report.dto.CrudDTO;
 
 import javax.ws.rs.client.Client;
