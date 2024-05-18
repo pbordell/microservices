@@ -1,4 +1,4 @@
-package com.pbs.gateway;
+package com.pbs.gateway.filters;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

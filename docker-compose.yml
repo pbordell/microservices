@@ -4,15 +4,15 @@ services:
   eurekaService:
     build: eurekaService/
     ports:
-      - "8080:8080"
+      - "8081:8081"
   apiGetaway:
     build: apiGetaway/
     ports:
-      - "8081:8081"
+      - "8082:8082"
   micro-api-quarkus:
     build: micro-api-quarkus/
     ports:
-      - "8082:8082"
+      - "8085:8085"
   micro-core-spring-boot:
     build: micro-core-spring-boot/
     ports:
@@ -20,7 +20,11 @@ services:
   micro-report-struts:
     build: micro-report-struts/
     ports:
-      - "8083:8083"
+      - "8084:8084"
+  micro-oauth:
+    build: micro-oauth/
+    ports:
+      - "9191:9191"
 
 networks:
   observabilitysandbox:

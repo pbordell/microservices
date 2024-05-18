@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/apiGetaway/apiGateway.iml" filepath="$PROJECT_DIR$/apiGetaway/apiGateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/apiGateway/apiGateway.iml" filepath="$PROJECT_DIR$/apiGateway/apiGateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eurekaService/eurekaService.iml" filepath="$PROJECT_DIR$/eurekaService/eurekaService.iml" />
       <module fileurl="file://$PROJECT_DIR$/micro-api-quarkus/micro-api-quarkus.iml" filepath="$PROJECT_DIR$/micro-api-quarkus/micro-api-quarkus.iml" />
       <module fileurl="file://$PROJECT_DIR$/micro-core-spring-boot/micro-core-spring-boot.iml" filepath="$PROJECT_DIR$/micro-core-spring-boot/micro-core-spring-boot.iml" />
       <module fileurl="file://$PROJECT_DIR$/micro-oauth/micro-oauth.iml" filepath="$PROJECT_DIR$/micro-oauth/micro-oauth.iml" />

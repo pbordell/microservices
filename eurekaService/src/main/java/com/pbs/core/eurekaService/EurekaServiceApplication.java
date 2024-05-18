@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @EnableEurekaServer
+@RefreshScope
 public class EurekaServiceApplication {
 
 	public static void main(String[] args) {
