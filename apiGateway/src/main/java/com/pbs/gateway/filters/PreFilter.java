@@ -1,4 +1,4 @@
-package com.pbs.gateway;
+package com.pbs.gateway.filters;
 
 import java.util.Set;
 

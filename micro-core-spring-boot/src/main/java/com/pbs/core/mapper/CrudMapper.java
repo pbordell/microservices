@@ -10,7 +10,7 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface CrudMapper {
 
-  Crud fromDTO(CrudDTO source) throws IOException;
+  Crud fromDTO(CrudDTO source);
 
   CrudDTO toDTO(Crud source);
 
