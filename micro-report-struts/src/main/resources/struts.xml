@@ -22,7 +22,13 @@
 
         <default-action-ref name="index"/>
 
-        <action name="generateReport" class="com.pbs.report.action.ReportAction">
+        <action name="generateReport" class="com.pbs.report.action.ReportAction" method="exportInExcel">
+            <result  name="success"  type="stream">
+                <param name="contentType">application/vnd.ms-excel</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="crudList.xls"</param>
+                <param name="bufferSize">4096</param>
+            </result>
         </action>
 
     </package>
