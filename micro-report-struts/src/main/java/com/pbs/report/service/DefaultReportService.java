@@ -21,8 +21,8 @@ public class DefaultReportService implements ReportService {
     }
 
     @Override
-    public HSSFWorkbook generateReport() {
-        List<CrudDTO> crudsDTO = coreCrudsClient.getCrusAll();
+    public HSSFWorkbook generateReport(String token) {
+        List<CrudDTO> crudsDTO = coreCrudsClient.getCrusAll(token);
 
         HSSFWorkbook workbook = null;
         try {

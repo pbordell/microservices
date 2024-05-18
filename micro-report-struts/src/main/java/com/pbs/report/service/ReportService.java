@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ReportService {
 
-    HSSFWorkbook generateReport();
+    HSSFWorkbook generateReport(String token);
 }

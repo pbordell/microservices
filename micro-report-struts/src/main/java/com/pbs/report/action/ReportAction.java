@@ -15,8 +15,8 @@ public class ReportAction extends ActionSupport implements Preparable {
 
     private ReportService reportService = new DefaultReportService();
 
-    public String generateReport() {
-        HSSFWorkbook workbook = reportService.generateReport();
+    public String generateReport(String token) {
+        HSSFWorkbook workbook = reportService.generateReport(token);
 
         try {
             ByteArrayOutputStream boas = new ByteArrayOutputStream();

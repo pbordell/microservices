@@ -54,8 +54,19 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.22</version>
+            <scope>compile</scope>
+        </dependency>
 
         <!-- client rs -->
+        <dependency>
+            <groupId>org.glassfish.jersey.security</groupId>
+            <artifactId>oauth2-client</artifactId>
+            <version>3.1.1</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-rs-client</artifactId>
@@ -65,12 +76,6 @@
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-transports-http-hc</artifactId>
             <version>3.5.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.22</version>
-            <scope>compile</scope>
         </dependency>
 
         <!-- apache poi -->
