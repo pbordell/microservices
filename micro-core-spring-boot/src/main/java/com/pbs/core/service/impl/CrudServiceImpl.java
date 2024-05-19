@@ -18,7 +18,7 @@ public class CrudServiceImpl implements CrudService {
 
   @Override
   public Crud getById(Long movieId) {
-    return crudRepository.getOne(movieId);
+    return crudRepository.getById(movieId);
   }
 
   @Override
