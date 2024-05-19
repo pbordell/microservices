@@ -6,12 +6,12 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "MOVIE")
+@Table(name = "CRUD")
 public class Crud {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_ID_MOVIE")
-  @SequenceGenerator(name = "SEQ_ID_MOVIE", sequenceName = "SEQ_ID_MOVIE")
+  @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_ID_CRUD")
+  @SequenceGenerator(name = "SEQ_ID_MOVIE", sequenceName = "SEQ_ID_CRUD")
   private Long id;
 
   @Column(name = "NAME", length = 50, nullable = false)
