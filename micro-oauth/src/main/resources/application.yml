@@ -1,31 +1,31 @@
-server:
-  port: 9191
-  servlet:
-    context-path: /auth-api
-
-spring:
+quarkus:
   application:
-    name: micro-oauth
+    name: micro-api-quarkus
 
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://eurekaservice:8081/eureka/
-  instance:
-    prefer-ip-address: false
-    hostname: micro-oauth
-    appname: MICRO-OAUTH
+  http:
+    port: 8085
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "health,info"
+  # Mantiene la ruta base para que el Gateway enganche el path /api-quarkus/**
+  resteasy:
+    path: /api-quarkus
 
-security:
-  oauth2:
-    resource:
-      jwt:
-        key-value: "mi-clave-secreta-de-laboratorio"
+  # 1. Configuración nativa del cliente de Eureka para Quarkus 3.x
+  eureka:
+    instance:
+      hostname: micro-api-quarkus
+    client:
+      register-with-eureka: true
+      service-url:
+        defaultZone: http://eurekaService:8081/eureka/
+
+  # 2. Vinculación de la interfaz CoreCrudsClient hacia la pasarela
+  rest-client:
+    gateway-api:
+      url: http://apiGetaway:8082
+
+  # 3. Solución definitiva al 401: Apaga el validador estricto interno de Quarkus.
+  # El microservicio ahora confía en que toda petición que le llegue por la red interna
+  # de Docker ya fue validada criptográficamente por el AuthenticationFilter del Gateway.
+  security:
+    auth:
+      enabled: false

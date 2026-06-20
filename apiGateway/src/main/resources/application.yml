@@ -23,14 +23,23 @@ spring:
             - Path=/core-api/**
 
         - id: micro-quarkus-route
-          uri: lb://micro-api-quarkus
+          uri: http://micro-api-quarkus:8085
           predicates:
             - Path=/api-quarkus/**
 
         - id: micro-struts-route
-          uri: lb://micro-report-struts
+          uri: http://micro-report-struts:8084
           predicates:
             - Path=/reports/**
+          filters:
+            - RewritePath=/reports/(?<segment>.*), /$\\{segment}
+
+        - id: micro-struts-route
+          uri: http://micro-report-struts:8084
+          predicates:
+            - Path=/reports/**
+          filters:
+            - 'RewritePath=/reports/(?<segment>.*), /${segment}'
 
 eureka:
   instance:
