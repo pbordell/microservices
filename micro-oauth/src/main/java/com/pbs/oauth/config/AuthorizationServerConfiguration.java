@@ -11,45 +11,40 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
-
-import javax.sql.DataSource;
+import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
 @EnableAuthorizationServer
 @Configuration
 public class AuthorizationServerConfiguration implements AuthorizationServerConfigurer {
 
-
   @Autowired
   private PasswordEncoder passwordEncoder;
 
   @Autowired
-  private DataSource dataSource;
-
-  @Autowired
   private AuthenticationManager authenticationManager;
 
-
   @Bean
-  TokenStore jdbcTokenStore() {
-    return new JdbcTokenStore(dataSource);
+  TokenStore inMemoryTokenStore() {
+    return new InMemoryTokenStore();
   }
 
   @Override
   public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
     security.checkTokenAccess("isAuthenticated()").tokenKeyAccess("permitAll()");
-
   }
 
   @Override
   public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-    clients.jdbc(dataSource).passwordEncoder(passwordEncoder);
-
+    clients.inMemory()
+            .withClient("mobile")
+            .secret(passwordEncoder.encode("pin"))
+            .scopes("read", "write")
+            .authorizedGrantTypes("password", "refresh_token", "client_credentials");
   }
 
   @Override
   public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-    endpoints.tokenStore(jdbcTokenStore());
+    endpoints.tokenStore(inMemoryTokenStore());
     endpoints.authenticationManager(authenticationManager);
   }
 }

@@ -12,10 +12,10 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <struts2.version>2.5.14.1</struts2.version>
-        <log4j2.version>2.10.0</log4j2.version>
-        <maven.compiler.source>19</maven.compiler.source>
-        <maven.compiler.target>19</maven.compiler.target>
+        <struts2.version>6.3.0.2</struts2.version>
+        <log4j2.version>2.20.0</log4j2.version>
+        <maven.compiler.release>17</maven.compiler.release>
+        <lombok.version>1.18.28</lombok.version>
     </properties>
 
     <dependencyManagement>
@@ -48,20 +48,15 @@
             <artifactId>log4j-core</artifactId>
         </dependency>
 
-        <!-- Lombok -->
+        <!-- 3. Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.22</version>
-            <scope>compile</scope>
-        </dependency>
 
-        <!-- client rs -->
+        <!-- Clients RS -->
         <dependency>
             <groupId>org.glassfish.jersey.security</groupId>
             <artifactId>oauth2-client</artifactId>
@@ -78,48 +73,28 @@
             <version>3.5.5</version>
         </dependency>
 
-        <!-- apache poi -->
+        <!-- Apache POI -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
-            <version>4.1.2</version>
+            <version>5.2.3</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-            <version>4.1.2</version>
+            <version>5.2.3</version>
         </dependency>
     </dependencies>
 
     <build>
-        <finalName>Struts2Example</finalName>
+        <finalName>micro-report-struts</finalName>
         <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.0</version>
+                <version>3.11.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <port>8080</port>
-                    <path>/app</path>
-                    <contextReloadable>true</contextReloadable>
-                    <contextFile>${project.basedir}/src/main/webapp/META-INF/context.xml</contextFile>
+                    <release>17</release>
                 </configuration>
             </plugin>
         </plugins>

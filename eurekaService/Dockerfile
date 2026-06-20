@@ -1,7 +1,7 @@
-FROM adoptopenjdk/openjdk11
+FROM eclipse-temurin:17-jre-alpine
 
-VOLUME /tmp
+WORKDIR /app
 
-COPY target/ApiGateway-0.0.1-SNAPSHOT.jar ApiGateway.jar
+COPY target/eurekaService-*.jar eureka-service.jar
 
-CMD  ["java","-jar","ApiGateway.jar"]
+ENTRYPOINT ["java", "-jar", "eureka-service.jar"]

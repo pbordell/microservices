@@ -1,7 +1,10 @@
-FROM adoptopenjdk/openjdk11
+FROM eclipse-temurin:17-jre-alpine
 
-VOLUME /tmp
+RUN addgroup -S gateway && adduser -S gateway -G gateway
+USER gateway:gateway
 
-COPY target/ApiGateway-0.0.1-SNAPSHOT.jar ApiGateway.jar
+WORKDIR /app
 
-CMD  ["java","-jar","ApiGateway.jar"]
+COPY target/apiGateway-0.0.1-SNAPSHOT.jar ApiGateway.jar
+
+ENTRYPOINT ["java", "-XX:+UseG1GC", "-Djava.security.egd=file:/dev/./urandom", "-jar", "ApiGateway.jar"]

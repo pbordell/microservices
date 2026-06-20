@@ -1,0 +1,50 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /core-api # <- Su contexto de entrada es /core-api
+
+spring:
+  application:
+    name: micro-core-spring-boot
+
+  # Base de datos H2 en memoria
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+
+  h2:
+    console:
+      enabled: true
+      path: /h2
+      settings:
+        trace: false
+        web-allow-others: true
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://eurekaservice:8081/eureka/
+  instance:
+    preferIpAddress: false
+    hostname: micro-core-spring-boot
+    appname: MICRO-CORE-SPRING-BOOT
+    lease-expiration-duration-in-seconds: 1
+    lease-renewal-interval-in-seconds: 2
+
+security:
+  oauth2:
+    resource:
+      jwt:
+        key-value: "mi-clave-secreta-de-laboratorio"
+    client:
+      client-id: mobile
+      client-secret: pin

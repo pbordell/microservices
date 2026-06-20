@@ -1,7 +1,10 @@
-FROM adoptopenjdk/openjdk11
+FROM eclipse-temurin:17-jre-alpine
 
-VOLUME /tmp
+RUN addgroup -S auth && adduser -S auth -G auth
+USER auth:auth
 
-COPY target/micro-auth-0.0.1-SNAPSHOT.jar micro-auth.jar
+WORKDIR /app
 
-CMD  ["java","-jar","micro-auth.jar"]
+COPY target/micro-oauth-0.0.1-SNAPSHOT.jar micro-auth.jar
+
+ENTRYPOINT ["java", "-XX:+UseG1GC", "-Djava.security.egd=file:/dev/./urandom", "-jar", "micro-auth.jar"]

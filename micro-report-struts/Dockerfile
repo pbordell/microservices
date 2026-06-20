@@ -1,7 +1,10 @@
-FROM adoptopenjdk/openjdk11
+FROM eclipse-temurin:17-jre-alpine
 
-VOLUME /tmp
+RUN addgroup -S struts && adduser -S struts -G struts
+USER struts:struts
 
-COPY target/micro-report-struts-0.0.1-SNAPSHOT.jar micro-report-struts.jar
+WORKDIR /app
 
-CMD  ["java","-jar","micro-report-struts.jar"]
+COPY target/micro-report-struts.jar micro-report-struts.jar
+
+ENTRYPOINT ["java", "-XX:+UseG1GC", "-Djava.security.egd=file:/dev/./urandom", "-jar", "micro-report-struts.jar"]

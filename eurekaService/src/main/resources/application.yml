@@ -1,0 +1,28 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: eureka-service
+
+eureka:
+  instance:
+    # En Docker es mejor identificarse por el nombre del host (contenedor) que por IP
+    prefer-ip-address: false
+    hostname: eurekaService
+  client:
+    # Al ser el servidor central de desarrollo, le decimos que NO se registre a sí mismo
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://eurekaService:8081/eureka/
+
+# Habilitar el endpoint de salud para el healthcheck de Docker que configuramos antes
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always

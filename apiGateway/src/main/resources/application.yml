@@ -1,0 +1,51 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+      # Mapeo genérico y limpio
+      routes:
+        - id: micro-oauth-route
+          uri: lb://micro-oauth
+          predicates:
+            - Path=/auth-api/**
+
+        - id: micro-core-route
+          uri: lb://micro-core-spring-boot
+          predicates:
+            - Path=/core-api/**
+
+        - id: micro-quarkus-route
+          uri: lb://micro-api-quarkus
+          predicates:
+            - Path=/api-quarkus/**
+
+        - id: micro-struts-route
+          uri: lb://micro-report-struts
+          predicates:
+            - Path=/reports/**
+
+eureka:
+  instance:
+    prefer-ip-address: false
+    hostname: apiGetaway
+    appname: API-GATEWAY
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eurekaservice:8081/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health

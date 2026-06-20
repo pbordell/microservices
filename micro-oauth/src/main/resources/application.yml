@@ -3,16 +3,29 @@ server:
   servlet:
     context-path: /auth-api
 
+spring:
+  application:
+    name: micro-oauth
+
 eureka:
   client:
+    register-with-eureka: true
+    fetch-registry: true
     service-url:
-      defaultZone: http://localhost:8081/eureka/
+      defaultZone: http://eurekaservice:8081/eureka/
   instance:
-    prefer-ip-address: true
+    prefer-ip-address: false
+    hostname: micro-oauth
+    appname: MICRO-OAUTH
 
 management:
   endpoints:
     web:
       exposure:
-        include: -*
-        exclude: env,beans
+        include: "health,info"
+
+security:
+  oauth2:
+    resource:
+      jwt:
+        key-value: "mi-clave-secreta-de-laboratorio"

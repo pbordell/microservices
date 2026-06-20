@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.pbs</groupId>
   <artifactId>micro-api-quarkus</artifactId>
@@ -8,16 +8,14 @@
   <name>micro-api-quarkus</name>
 
   <properties>
-    <compiler-plugin.version>3.8.1</compiler-plugin.version>
-    <failsafe.useModulePath>false</failsafe.useModulePath>
-    <maven.compiler.release>11</maven.compiler.release>
+    <compiler-plugin.version>3.11.0</compiler-plugin.version>
+    <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-    <quarkus.platform.version>2.7.5.Final</quarkus.platform.version>
-    <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
-    <lombok.version>1.18.20</lombok.version>
+    <quarkus.platform.version>3.8.3</quarkus.platform.version>
+    <surefire-plugin.version>3.2.5</surefire-plugin.version>
   </properties>
 
   <dependencyManagement>
@@ -33,40 +31,41 @@
   </dependencyManagement>
 
   <dependencies>
-    <!-- Quarkus -->
+    <!-- 2. Extensiones oficiales de Quarkus REST (RESTEasy Reactive) -->
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-rest-client</artifactId>
+      <artifactId>quarkus-rest-client-jackson</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-arc</artifactId>
     </dependency>
+
+    <!-- 3. Seguridad nativa con JWT manejada por el ecosistema de Quarkus -->
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-rest-client-jackson</artifactId>
+      <artifactId>quarkus-smallrye-jwt</artifactId>
     </dependency>
 
-    <!-- Lombok -->
+    <!-- 4. Lombok oficial integrado en el ciclo de Quarkus -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>${lombok.version}</version>
+      <version>1.18.28</version>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-        <groupId>org.glassfish.jersey.security</groupId>
-        <artifactId>oauth2-client</artifactId>
-        <version>3.1.1</version>
-        <scope>compile</scope>
-    </dependency>
 
     <dependency>
-      <groupId>org.eclipse.microprofile.jwt</groupId>
-      <artifactId>microprofile-jwt-auth-api</artifactId>
-      <version>2.1</version>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-config-yaml</artifactId>
     </dependency>
 
+    <!-- Test -->
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-junit5</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
