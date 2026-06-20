@@ -11,7 +11,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @EnableAuthorizationServer
 @Configuration
@@ -24,8 +25,16 @@ public class AuthorizationServerConfiguration implements AuthorizationServerConf
   private AuthenticationManager authenticationManager;
 
   @Bean
-  TokenStore inMemoryTokenStore() {
-    return new InMemoryTokenStore();
+  public TokenStore tokenStore() {
+    return new JwtTokenStore(accessTokenConverter());
+  }
+
+  // 2. Creamos el convertidor JWT con la clave simétrica idéntica a la del Core
+  @Bean
+  public JwtAccessTokenConverter accessTokenConverter() {
+    JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+    converter.setSigningKey("mi-clave-secreta-de-laboratorio");
+    return converter;
   }
 
   @Override
@@ -44,7 +53,9 @@ public class AuthorizationServerConfiguration implements AuthorizationServerConf
 
   @Override
   public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-    endpoints.tokenStore(inMemoryTokenStore());
-    endpoints.authenticationManager(authenticationManager);
+    endpoints
+            .tokenStore(tokenStore())
+            .accessTokenConverter(accessTokenConverter())
+            .authenticationManager(authenticationManager);
   }
 }

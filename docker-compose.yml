@@ -69,13 +69,11 @@ services:
   micro-report-struts:
     build: micro-report-struts/
     image: micro-report-struts:latest
+    container_name: micro-report-struts
     ports:
       - "8084:8084"
     networks:
       - observabilitysandbox
-    depends_on:
-      eurekaservice:
-        condition: service_healthy
 
 networks:
   observabilitysandbox:
