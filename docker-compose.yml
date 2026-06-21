@@ -71,7 +71,28 @@ services:
     image: micro-report-struts:latest
     container_name: micro-report-struts
     ports:
-      - "8084:8084"
+      - "8084:8080"
+    networks:
+      - observabilitysandbox
+
+  micro-analytics-python:
+    build: micro-analytics-python/
+    image: micro-analytics-python:latest
+    container_name: micro-analytics-python
+    ports:
+      - "8000:8000"
+    networks:
+      - observabilitysandbox
+    depends_on:
+      apigateway:
+        condition: service_started
+
+  micro-notification-node:
+    build: micro-notification-node/
+    image: micro-notification-node:latest
+    container_name: micro-notification-node
+    ports:
+      - "3000:3000"
     networks:
       - observabilitysandbox
 
