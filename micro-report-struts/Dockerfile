@@ -1,10 +1,13 @@
-FROM eclipse-temurin:17-jre-alpine
-
-RUN addgroup -S struts && adduser -S struts -G struts
-USER struts:struts
-
+FROM maven:3.8.5-openjdk-17 AS build
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-COPY target/micro-report-struts.jar micro-report-struts.jar
+FROM tomcat:9.0-jdk17-temurin
 
-ENTRYPOINT ["java", "-XX:+UseG1GC", "-Djava.security.egd=file:/dev/./urandom", "-jar", "micro-report-struts.jar"]
+RUN rm -rf /usr/local/tomcat/webapps/*
+COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/reports.war
+
+EXPOSE 8080
+CMD ["catalina.sh", "run"]

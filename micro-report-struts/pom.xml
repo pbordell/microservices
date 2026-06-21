@@ -1,12 +1,13 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://apache.org"
+         xmlns:xsi="http://w3.org"
+         xsi:schemaLocation="http://apache.org http://apache.org">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.pbs</groupId>
     <artifactId>micro-report-struts</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
     <name>micro-report-struts</name>
 
     <properties>
@@ -16,6 +17,7 @@
         <log4j2.version>2.20.0</log4j2.version>
         <maven.compiler.release>17</maven.compiler.release>
         <lombok.version>1.18.28</lombok.version>
+        <cxf.version>4.0.3</cxf.version>
     </properties>
 
     <dependencyManagement>
@@ -38,7 +40,7 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- Struts 2 -->
+        <!-- Struts 2 Core -->
         <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-core</artifactId>
@@ -48,7 +50,29 @@
             <artifactId>log4j-core</artifactId>
         </dependency>
 
-        <!-- 3. Lombok -->
+        <!-- 1. EL MOTOR QUE FALTA: Proporciona el validador de expresiones que exige Struts 6 en Tomcat 10 -->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>jakarta.el</artifactId>
+            <version>4.0.2</version>
+        </dependency>
+
+        <!-- Motor de expresiones para vistas compiladas JSTL -->
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+
+        <!-- API de Servlets de Jakarta (provided por Tomcat) -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -56,7 +80,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Clients RS -->
+        <!-- Clients RS (Sintaxis nativa de CXF 4 para Java 17) -->
         <dependency>
             <groupId>org.glassfish.jersey.security</groupId>
             <artifactId>oauth2-client</artifactId>
@@ -65,12 +89,12 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-rs-client</artifactId>
-            <version>3.5.5</version>
+            <version>${cxf.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-transports-http-hc</artifactId>
-            <version>3.5.5</version>
+            <version>${cxf.version}</version>
         </dependency>
 
         <!-- Apache POI -->
@@ -95,6 +119,21 @@
                 <version>3.11.0</version>
                 <configuration>
                     <release>17</release>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
         </plugins>

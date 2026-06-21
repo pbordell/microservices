@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- 1. Actualizado el DTD para que sea compatible con Struts 6.x sin dar fallos de parseo -->
 <!DOCTYPE struts PUBLIC
-        "-//Apache Software Foundation//DTD Struts Configuration 6.0.0//EN"
+        "-//Apache Software Foundation//DTD Struts Configuration 6.0//EN"
         "http://apache.org">
 <struts>
     <constant name="struts.devMode" value="true" />
     <constant name="struts.mapper.action.prefix.enabled" value="true" />
 
-    <!-- 2. CORREGIDO: Cambiado namespace de "/" a "/reports" para alinearse con el API Gateway -->
-    <package name="reports" namespace="/reports" extends="struts-default" >
+    <package name="reports" namespace="/" extends="struts-default" >
 
         <interceptors>
             <interceptor-stack name="appDefault">
-                <interceptor-ref name="paramsPrepareParamsStack">
+                <interceptor-ref name="defaultStack">
                     <param name="exception.logEnabled">true</param>
                     <param name="exception.logLevel">ERROR</param>
                     <param name="params.excludeParams">dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,parameters\...*,submit</param>
@@ -23,7 +21,7 @@
         <default-interceptor-ref name="appDefault" />
 
         <action name="generateReport" class="com.pbs.report.action.ReportAction" method="exportInExcel">
-            <result  name="success"  type="stream">
+            <result name="success" type="stream">
                 <param name="contentType">application/vnd.ms-excel</param>
                 <param name="inputName">inputStream</param>
                 <param name="contentDisposition">attachment;filename="crudList.xls"</param>
