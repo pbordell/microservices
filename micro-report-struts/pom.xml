@@ -50,25 +50,11 @@
             <artifactId>log4j-core</artifactId>
         </dependency>
 
-        <!-- 1. EL MOTOR QUE FALTA: Proporciona el validador de expresiones que exige Struts 6 en Tomcat 10 -->
+        <!-- API DE SERVLETS EN VERSIÓN JAVAX (Obligatoria para Tomcat 9 y para compilar tu clase) -->
         <dependency>
-            <groupId>org.glassfish</groupId>
-            <artifactId>jakarta.el</artifactId>
-            <version>4.0.2</version>
-        </dependency>
-
-        <!-- Motor de expresiones para vistas compiladas JSTL -->
-        <dependency>
-            <groupId>org.glassfish.web</groupId>
-            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
-            <version>3.0.1</version>
-        </dependency>
-
-        <!-- API de Servlets de Jakarta (provided por Tomcat) -->
-        <dependency>
-            <groupId>jakarta.servlet</groupId>
-            <artifactId>jakarta.servlet-api</artifactId>
-            <version>6.0.0</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
 
@@ -80,7 +66,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Clients RS (Sintaxis nativa de CXF 4 para Java 17) -->
+        <!-- Clients RS -->
         <dependency>
             <groupId>org.glassfish.jersey.security</groupId>
             <artifactId>oauth2-client</artifactId>
@@ -89,12 +75,12 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-rs-client</artifactId>
-            <version>${cxf.version}</version>
+            <version>4.0.3</version>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-transports-http-hc</artifactId>
-            <version>${cxf.version}</version>
+            <version>4.0.3</version>
         </dependency>
 
         <!-- Apache POI -->
@@ -108,6 +94,13 @@
             <artifactId>poi-ooxml</artifactId>
             <version>5.2.3</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.jakarta.rs</groupId>
+            <artifactId>jackson-jakarta-rs-json-provider</artifactId>
+            <version>2.15.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>

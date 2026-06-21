@@ -14,53 +14,48 @@ import java.util.List;
 
 public class DefaultReportService implements ReportService {
 
-    private CoreCrudsClient coreCrudsClient = new CoreCrudsClient();
+  private CoreCrudsClient coreCrudsClient = new CoreCrudsClient();
 
-    public DefaultReportService() {
+  public DefaultReportService() {}
 
-    }
+  @Override
+  public HSSFWorkbook generateReport(String token) {
+    List<CrudDTO> crudsDTO = coreCrudsClient.getCrusAll(token);
 
-    @Override
-    public HSSFWorkbook generateReport(String token) {
-        List<CrudDTO> crudsDTO = coreCrudsClient.getCrusAll(token);
+    HSSFWorkbook workbook = null;
+    try {
+      workbook = new HSSFWorkbook();
+      HSSFSheet sheet = workbook.createSheet("Crud List");
 
-        HSSFWorkbook workbook = null;
-        try {
-            workbook = new HSSFWorkbook();
-            HSSFSheet sheet = workbook.createSheet("Crud List");
+      Row rowHeading = sheet.createRow(0);
+      rowHeading.createCell(0).setCellValue("Name");
 
-            Row rowHeading = sheet.createRow(0);
-            rowHeading.createCell(0).setCellValue("Name");
+      CellStyle stylerowHeading = workbook.createCellStyle();
+      Font font = workbook.createFont();
+      font.setBold(true);
+      font.setFontName(HSSFFont.FONT_ARIAL);
+      font.setFontHeightInPoints((short) 11);
+      stylerowHeading.setFont(font);
+      rowHeading.getCell(0).setCellStyle(stylerowHeading);
 
-            for (int i = 0; i < 4; i++) {
-                CellStyle stylerowHeading = workbook.createCellStyle();
-                Font font = workbook.createFont();
-                font.setBold(true);
-                font.setFontName(HSSFFont.FONT_ARIAL);
-                font.setFontHeightInPoints((short) 11);
-                stylerowHeading.setFont(font);
-                rowHeading.getCell(i).setCellStyle(stylerowHeading);
-            }
-
-            int r = 1;
-            for (CrudDTO t : crudsDTO) {
-                Row row = sheet.createRow(r);
-
-                Cell cellMobileNumber = row.createCell(0);
-                cellMobileNumber.setCellValue(t.getName());
-
-                r++;
-            }
-
-            for (int i = 0; i < 4; i++) {
-                sheet.autoSizeColumn(i);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+      int r = 1;
+      if (crudsDTO != null) {
+        for (CrudDTO t : crudsDTO) {
+          if (t != null) {
+            Row row = sheet.createRow(r);
+            Cell cellName = row.createCell(0);
+            cellName.setCellValue(t.getName());
+            r++;
+          }
         }
+      }
 
-        return workbook;
+      sheet.autoSizeColumn(0);
+
+    } catch (Exception e) {
+      e.printStackTrace();
     }
 
+    return workbook;
+  }
 }
