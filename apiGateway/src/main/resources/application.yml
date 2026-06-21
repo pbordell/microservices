@@ -28,12 +28,19 @@ spring:
             - Path=/api-quarkus/**
 
         - id: micro-struts-route
-          uri: http://micro-report-struts:8084
+          uri: http://micro-report-struts:8080
           predicates:
             - Path=/reports/**
-          filters:
-            - 'RewritePath=/reports/(?<segment>.*), /${segment}'
 
+        - id: micro-analytics-route
+          uri: http://micro-analytics-python:8000
+          predicates:
+            - Path=/analytics/**
+
+        - id: micro-notification-route
+          uri: http://micro-notification-node:3000
+          predicates:
+            - Path=/notifications/**
 eureka:
   instance:
     prefer-ip-address: false
