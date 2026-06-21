@@ -30,7 +30,7 @@ public class ReportAction extends ActionSupport implements Preparable {
 
         // 3. Fallback de control para asegurar que el servicio POI siempre reciba una cadena
         if (token == null || token.isEmpty()) {
-            token = "token-laboratorio-defecto";
+            return ERROR;
         }
 
         // 4. Invocación directa a tu lógica de negocio

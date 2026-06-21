@@ -31,19 +31,6 @@ services:
       timeout: 3s
       retries: 5
 
-  apigateway:
-    build: apiGateway/
-    image: apigateway:latest
-    ports:
-      - "8082:8082"
-    networks:
-      - observabilitysandbox
-    depends_on:
-      eurekaservice:
-        condition: service_healthy
-      micro-oauth:
-        condition: service_healthy
-
   micro-api-quarkus:
     build: micro-api-quarkus/
     image: micro-api-quarkus:latest
@@ -66,6 +53,35 @@ services:
       eurekaservice:
         condition: service_healthy
 
+  micro-notification-node:
+    build: micro-notification-node/
+    image: micro-notification-node:latest
+    container_name: micro-notification-node
+    ports:
+      - "3000:3000"
+    networks:
+      - observabilitysandbox
+    # Corregido: Ya no depende del gateway para no romper la inicialización de rutas
+
+  apigateway:
+    build: apiGateway/
+    image: apigateway:latest
+    ports:
+      - "8082:8082"
+    networks:
+      - observabilitysandbox
+    depends_on:
+      eurekaservice:
+        condition: service_healthy
+      micro-oauth:
+        condition: service_healthy
+      micro-core-spring-boot:
+        condition: service_started
+      micro-api-quarkus:
+        condition: service_started
+      micro-notification-node:
+        condition: service_started
+
   micro-report-struts:
     build: micro-report-struts/
     image: micro-report-struts:latest
@@ -74,6 +90,9 @@ services:
       - "8084:8080"
     networks:
       - observabilitysandbox
+    depends_on:
+      apigateway:
+        condition: service_started
 
   micro-analytics-python:
     build: micro-analytics-python/
@@ -86,15 +105,6 @@ services:
     depends_on:
       apigateway:
         condition: service_started
-
-  micro-notification-node:
-    build: micro-notification-node/
-    image: micro-notification-node:latest
-    container_name: micro-notification-node
-    ports:
-      - "3000:3000"
-    networks:
-      - observabilitysandbox
 
 networks:
   observabilitysandbox:
