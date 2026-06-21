@@ -8,4 +8,6 @@ import java.util.List;
 public interface ReportService {
 
     HSSFWorkbook generateReport(String token);
+
+    void sendEmailNotification(String token, String reportName);
 }

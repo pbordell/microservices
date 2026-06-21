@@ -1,6 +1,7 @@
 package com.pbs.report.service;
 
 import com.pbs.report.client.CoreCrudsClient;
+import com.pbs.report.client.NodeNotificationClient;
 import com.pbs.report.dto.CrudDTO;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -15,6 +16,8 @@ import java.util.List;
 public class DefaultReportService implements ReportService {
 
   private CoreCrudsClient coreCrudsClient = new CoreCrudsClient();
+
+  private NodeNotificationClient nodeNotificationClient = new NodeNotificationClient();
 
   public DefaultReportService() {}
 
@@ -57,5 +60,10 @@ public class DefaultReportService implements ReportService {
     }
 
     return workbook;
+  }
+
+  @Override
+  public void sendEmailNotification(String token, String reportName) {
+    nodeNotificationClient.sendEmailNotification(reportName, token);
   }
 }
