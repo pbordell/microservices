@@ -10,8 +10,8 @@ const transporter = nodemailer.createTransport({
     port: 587,
     secure: false, // false para puerto 587 (TLS)
     auth: {
-        user: 'tu-correo-completo@gmail.com', // Coloca aquí tu cuenta de Gmail real
-        pass: 'abcd efgh ijkl mnop'  // Tu Contraseña de Aplicación de Google de 16 caracteres
+        user: 'xxx', // Coloca aquí tu cuenta de Gmail real
+        pass: 'xxx'  // Tu Contraseña de Aplicación de Google de 16 caracteres
     },
     tls: {
         rejectUnauthorized: false // Permite la comunicación a través del proxy de red de Docker

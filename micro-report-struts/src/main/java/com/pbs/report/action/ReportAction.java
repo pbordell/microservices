@@ -40,6 +40,10 @@ public class ReportAction extends ActionSupport implements Preparable {
             ByteArrayOutputStream boas = new ByteArrayOutputStream();
             workbook.write(boas);
             this.inputStream = new ByteArrayInputStream(boas.toByteArray());
+
+            // 2. DISPARO AUTOMÁTICO: Invocamos al servicio de node para enviar una alerta por mail
+            reportService.sendEmailNotification(token, "crudList.xls");
+
         } catch (IOException e) {
             e.printStackTrace();
             return ERROR;

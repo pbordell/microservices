@@ -5,7 +5,7 @@ import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Invocation;
 import jakarta.ws.rs.client.WebTarget;
-import jakarta.ws.rs.core.GenericType; // IMPORTACIÓN CRÍTICA
+import jakarta.ws.rs.core.GenericType;
 import com.fasterxml.jackson.jakarta.rs.json.JacksonJsonProvider;
 
 import java.util.List;
