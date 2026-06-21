@@ -7,7 +7,6 @@
     <constant name="struts.devMode" value="true" />
     <constant name="struts.mapper.action.prefix.enabled" value="true" />
 
-    <!-- 2. CORREGIDO: Cambiado namespace de "/" a "/reports" para alinearse con el API Gateway -->
     <package name="reports" namespace="/reports" extends="struts-default" >
 
         <interceptors>

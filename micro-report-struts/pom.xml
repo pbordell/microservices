@@ -1,12 +1,13 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://apache.org"
+         xmlns:xsi="http://w3.org"
+         xsi:schemaLocation="http://apache.org http://apache.org">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.pbs</groupId>
     <artifactId>micro-report-struts</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
     <name>micro-report-struts</name>
 
     <properties>
@@ -38,7 +39,7 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- Struts 2 -->
+        <!-- Struts 2 Core -->
         <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-core</artifactId>
@@ -48,7 +49,22 @@
             <artifactId>log4j-core</artifactId>
         </dependency>
 
-        <!-- 3. Lombok -->
+        <!-- MOTOR CRÍTICO: Proporciona la implementación de expresiones JSTL/OGNL para Tomcat 10 -->
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+
+        <!-- API de Servlets de Jakarta (Requerida por Tomcat 10+ y Struts 6) -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -95,6 +111,22 @@
                 <version>3.11.0</version>
                 <configuration>
                     <release>17</release>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            <!-- Plugin de Maven WAR para asegurar el empaquetado sin errores de web.xml ausentes -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
         </plugins>
