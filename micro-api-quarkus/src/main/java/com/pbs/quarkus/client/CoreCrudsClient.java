@@ -6,9 +6,8 @@ import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import java.util.List;
 
-// Registramos la interfaz para que Quarkus la implemente por nosotros
 @RegisterRestClient(configKey = "gateway-api")
-@Path("/CrudBasic/cruds") // Unificamos el path base que tenías mapeado
+@Path("/core-api/CrudBasic/cruds")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public interface CoreCrudsClient {
@@ -18,14 +17,14 @@ public interface CoreCrudsClient {
 	List<CrudDTO> getCrusAll(@HeaderParam("Authorization") String token);
 
 	@POST
-	@Path("/create")
+	@Path("/")
 	void create(@HeaderParam("Authorization") String token, CrudDTO item);
 
 	@PUT
-	@Path("/update")
+	@Path("/")
 	void update(@HeaderParam("Authorization") String token, CrudDTO item);
 
 	@DELETE
-	@Path("/delete")
-	void delete(@HeaderParam("Authorization") String token, @QueryParam("id") Long id);
+	@Path("/{id}")
+	void delete(@HeaderParam("Authorization") String token, @PathParam("id") Long id);
 }

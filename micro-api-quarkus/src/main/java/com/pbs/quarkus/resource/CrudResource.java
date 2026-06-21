@@ -24,35 +24,24 @@ public class CrudResource {
     @Inject
     CrudService crudService;
 
-    private String extractToken(String authHeader) {
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            return authHeader.substring(7).trim();
-        }
-        return null;
-    }
-
     @GET
     public List<CrudDTO> get(@HeaderParam("Authorization") String authHeader) {
-        String token = extractToken(authHeader);
-        return crudService.get(token);
+        return crudService.get(authHeader);
     }
 
     @POST
     public void create(@HeaderParam("Authorization") String authHeader, CrudDTO item) {
-        String token = extractToken(authHeader);
-        crudService.create(token, item);
+        crudService.create(authHeader, item);
     }
 
     @PUT
     public void update(@HeaderParam("Authorization") String authHeader, CrudDTO item) {
-        String token = extractToken(authHeader);
-        crudService.update(token, item);
+        crudService.update(authHeader, item);
     }
 
     @DELETE
     @Path("{id}")
     public void delete(@HeaderParam("Authorization") String authHeader, @PathParam("id") Long id) {
-        String token = extractToken(authHeader);
-        crudService.delete(token, id);
+        crudService.delete(authHeader, id);
     }
 }
