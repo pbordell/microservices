@@ -45,8 +45,9 @@ services:
   micro-core-spring-boot:
     build: micro-core-spring-boot/
     image: micro-core-spring-boot:latest
-    ports:
-      - "8083:8083"
+    # Cambiado a expose para protegerlo del exterior
+    expose:
+      - "8083"
     networks:
       - observabilitysandbox
     depends_on:
@@ -57,17 +58,17 @@ services:
     build: micro-notification-node/
     image: micro-notification-node:latest
     container_name: micro-notification-node
-    ports:
-      - "3000:3000"
+    # Cambiado a expose para que Postman no se salte el Gateway
+    expose:
+      - "3000"
     networks:
       - observabilitysandbox
-    # Corregido: Ya no depende del gateway para no romper la inicialización de rutas
 
   apigateway:
     build: apiGateway/
     image: apigateway:latest
     ports:
-      - "8082:8082"
+      - "8082:8082" # Única puerta de entrada pública a los microservicios
     networks:
       - observabilitysandbox
     depends_on:
